@@ -1,0 +1,14 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "./proto;proto";
+
+message Empty {}
+
+service IPlugin {
+  rpc Init(Empty) returns (Empty);
+  rpc Run(Empty) returns (Empty);
+  rpc Stop(Empty) returns (Empty);
+}
+
+// protoc --go_out=plugins=grpc:. ./proto/proto.proto
