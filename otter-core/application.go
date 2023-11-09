@@ -8,12 +8,12 @@ import (
 
 type Application struct {
 	config *Config
-	client *plugin.Client
 	opts   *Options
 }
 
 func (a *Application) Init() {
-	a.client = plugin.NewClient(&plugin.ClientConfig{
+	//TODO 使用config初始化opts
+	a.opts.Client = plugin.NewClient(&plugin.ClientConfig{
 		HandshakeConfig: a.opts.Handshake,
 		Plugins:         a.opts.PluginMap,
 		Cmd:             exec.Command("sh", "-c", os.Getenv("KV_PLUGIN")),

@@ -9,6 +9,7 @@ type Config struct {
 }
 
 type Options struct {
+	Client    *plugin.Client
 	Handshake plugin.HandshakeConfig
 	PluginMap map[string]plugin.Plugin
 }
