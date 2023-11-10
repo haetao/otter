@@ -62,21 +62,70 @@ func (*Empty) Descriptor() ([]byte, []int) {
 	return file_proto_proto_proto_rawDescGZIP(), []int{0}
 }
 
+type InitRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *InitRequest) Reset() {
+	*x = InitRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_proto_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *InitRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitRequest) ProtoMessage() {}
+
+func (x *InitRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_proto_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitRequest.ProtoReflect.Descriptor instead.
+func (*InitRequest) Descriptor() ([]byte, []int) {
+	return file_proto_proto_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *InitRequest) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_proto_proto_proto protoreflect.FileDescriptor
 
 var file_proto_proto_proto_rawDesc = []byte{
 	0x0a, 0x11, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x12, 0x05, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x07, 0x0a, 0x05, 0x45, 0x6d,
-	0x70, 0x74, 0x79, 0x32, 0x74, 0x0a, 0x07, 0x49, 0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x12, 0x22,
-	0x0a, 0x04, 0x49, 0x6e, 0x69, 0x74, 0x12, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45,
+	0x70, 0x74, 0x79, 0x22, 0x21, 0x0a, 0x0b, 0x49, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x32, 0x7a, 0x0a, 0x07, 0x49, 0x50, 0x6c, 0x75, 0x67, 0x69,
+	0x6e, 0x12, 0x28, 0x0a, 0x04, 0x49, 0x6e, 0x69, 0x74, 0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0c, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x21, 0x0a, 0x03, 0x52,
+	0x75, 0x6e, 0x12, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79,
+	0x1a, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x22,
+	0x0a, 0x04, 0x53, 0x74, 0x6f, 0x70, 0x12, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45,
 	0x6d, 0x70, 0x74, 0x79, 0x1a, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x12, 0x21, 0x0a, 0x03, 0x52, 0x75, 0x6e, 0x12, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x22, 0x0a, 0x04, 0x53, 0x74, 0x6f, 0x70, 0x12, 0x0c, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x0c, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x42, 0x0f, 0x5a, 0x0d, 0x2e, 0x2f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x74, 0x79, 0x42, 0x0f, 0x5a, 0x0d, 0x2e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x3b, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -91,12 +140,13 @@ func file_proto_proto_proto_rawDescGZIP() []byte {
 	return file_proto_proto_proto_rawDescData
 }
 
-var file_proto_proto_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_proto_proto_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_proto_proto_goTypes = []interface{}{
-	(*Empty)(nil), // 0: proto.Empty
+	(*Empty)(nil),       // 0: proto.Empty
+	(*InitRequest)(nil), // 1: proto.InitRequest
 }
 var file_proto_proto_proto_depIdxs = []int32{
-	0, // 0: proto.IPlugin.Init:input_type -> proto.Empty
+	1, // 0: proto.IPlugin.Init:input_type -> proto.InitRequest
 	0, // 1: proto.IPlugin.Run:input_type -> proto.Empty
 	0, // 2: proto.IPlugin.Stop:input_type -> proto.Empty
 	0, // 3: proto.IPlugin.Init:output_type -> proto.Empty
@@ -127,6 +177,18 @@ func file_proto_proto_proto_init() {
 				return nil
 			}
 		}
+		file_proto_proto_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*InitRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -134,7 +196,7 @@ func file_proto_proto_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_proto_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -160,7 +222,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type IPluginClient interface {
-	Init(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	Init(ctx context.Context, in *InitRequest, opts ...grpc.CallOption) (*Empty, error)
 	Run(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 	Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 }
@@ -173,7 +235,7 @@ func NewIPluginClient(cc grpc.ClientConnInterface) IPluginClient {
 	return &iPluginClient{cc}
 }
 
-func (c *iPluginClient) Init(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+func (c *iPluginClient) Init(ctx context.Context, in *InitRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/proto.IPlugin/Init", in, out, opts...)
 	if err != nil {
@@ -202,7 +264,7 @@ func (c *iPluginClient) Stop(ctx context.Context, in *Empty, opts ...grpc.CallOp
 
 // IPluginServer is the server API for IPlugin service.
 type IPluginServer interface {
-	Init(context.Context, *Empty) (*Empty, error)
+	Init(context.Context, *InitRequest) (*Empty, error)
 	Run(context.Context, *Empty) (*Empty, error)
 	Stop(context.Context, *Empty) (*Empty, error)
 }
@@ -211,7 +273,7 @@ type IPluginServer interface {
 type UnimplementedIPluginServer struct {
 }
 
-func (*UnimplementedIPluginServer) Init(context.Context, *Empty) (*Empty, error) {
+func (*UnimplementedIPluginServer) Init(context.Context, *InitRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Init not implemented")
 }
 func (*UnimplementedIPluginServer) Run(context.Context, *Empty) (*Empty, error) {
@@ -226,7 +288,7 @@ func RegisterIPluginServer(s *grpc.Server, srv IPluginServer) {
 }
 
 func _IPlugin_Init_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(InitRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -238,7 +300,7 @@ func _IPlugin_Init_Handler(srv interface{}, ctx context.Context, dec func(interf
 		FullMethod: "/proto.IPlugin/Init",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IPluginServer).Init(ctx, req.(*Empty))
+		return srv.(IPluginServer).Init(ctx, req.(*InitRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

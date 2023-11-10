@@ -8,60 +8,64 @@ import (
 )
 
 type IModulePlugin interface {
-	Init()
+	Init(data []byte)
 	Run()
 	Stop()
 }
 
-type ModuleClient struct {
+// ============================================= GRPC ================================================
+
+type ModuleGrpcClient struct {
 	client proto.IPluginClient
 }
 
-func (m *ModuleClient) Init() {
-	m.client.Init(context.Background(), &proto.Empty{})
+func (m *ModuleGrpcClient) Init(data []byte) {
+	m.client.Init(context.Background(), &proto.InitRequest{Data: data})
 }
 
-func (m *ModuleClient) Run() {
+func (m *ModuleGrpcClient) Run() {
 	m.client.Run(context.Background(), &proto.Empty{})
 }
 
-func (m *ModuleClient) Stop() {
+func (m *ModuleGrpcClient) Stop() {
 	m.client.Stop(context.Background(), &proto.Empty{})
 }
 
-type ModuleServer struct {
+type ModuleGrpcServer struct {
 	Impl IModulePlugin
 }
 
-func (m *ModuleServer) Init(context.Context, *proto.Empty) (*proto.Empty, error) {
-	m.Impl.Init()
+func (m *ModuleGrpcServer) Init(_ context.Context, req *proto.InitRequest) (*proto.Empty, error) {
+	m.Impl.Init(req.Data)
 	return &proto.Empty{}, nil
 }
 
-func (m *ModuleServer) Run(context.Context, *proto.Empty) (*proto.Empty, error) {
+func (m *ModuleGrpcServer) Run(context.Context, *proto.Empty) (*proto.Empty, error) {
 	m.Impl.Run()
 	return &proto.Empty{}, nil
 }
 
-func (m *ModuleServer) Stop(context.Context, *proto.Empty) (*proto.Empty, error) {
+func (m *ModuleGrpcServer) Stop(context.Context, *proto.Empty) (*proto.Empty, error) {
 	m.Impl.Stop()
 	return &proto.Empty{}, nil
 }
 
-type ModulePlugin struct {
-	plugin.GRPCPlugin
+type ModuleGrpcPlugin struct {
+	plugin.Plugin
 	Impl IModulePlugin
 }
 
-func (m *ModulePlugin) GRPCServer(broker *plugin.GRPCBroker, s *grpc.Server) error {
-	proto.RegisterIPluginServer(s, &ModuleServer{
+func (m *ModuleGrpcPlugin) GRPCServer(broker *plugin.GRPCBroker, s *grpc.Server) error {
+	proto.RegisterIPluginServer(s, &ModuleGrpcServer{
 		Impl: m.Impl,
 	})
 	return nil
 }
 
-func (m *ModulePlugin) GRPCClient(c context.Context, broker *plugin.GRPCBroker, conn *grpc.ClientConn) (interface{}, error) {
-	return &ModuleClient{
+func (m *ModuleGrpcPlugin) GRPCClient(c context.Context, broker *plugin.GRPCBroker, conn *grpc.ClientConn) (interface{}, error) {
+	return &ModuleGrpcClient{
 		client: proto.NewIPluginClient(conn),
 	}, nil
 }
+
+// ============================================= GRPC ================================================

@@ -3,9 +3,10 @@ package otter_core
 import "github.com/hashicorp/go-plugin"
 
 type Config struct {
-	Version  string `yaml:"version"`
-	AppName  string `yaml:"appName"`
-	Endpoint string `yaml:"endpoint"`
+	Version    string                 `yaml:"version"`
+	AppName    string                 `yaml:"appName"`
+	Endpoint   string                 `yaml:"endpoint"`
+	ModConfigs map[string]interface{} `yaml:"modConfigs"`
 }
 
 type Options struct {

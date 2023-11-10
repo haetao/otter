@@ -5,8 +5,12 @@ option go_package = "./proto;proto";
 
 message Empty {}
 
+message InitRequest {
+  bytes data = 1;
+}
+
 service IPlugin {
-  rpc Init(Empty) returns (Empty);
+  rpc Init(InitRequest) returns (Empty);
   rpc Run(Empty) returns (Empty);
   rpc Stop(Empty) returns (Empty);
 }

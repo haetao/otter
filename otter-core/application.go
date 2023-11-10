@@ -1,7 +1,9 @@
 package otter_core
 
 import (
+	"github.com/haetao/otter-core/shared"
 	"github.com/hashicorp/go-plugin"
+	"gopkg.in/yaml.v3"
 	"os"
 	"os/exec"
 )
@@ -11,14 +13,23 @@ type Application struct {
 	opts   *Options
 }
 
+func (a *Application) AppName() string {
+	return a.config.AppName
+}
+
+func (a *Application) Version() string {
+	return a.config.Version
+}
+
 func (a *Application) Init() {
-	//TODO 使用config初始化opts
+	for k, _ := range a.config.ModConfigs {
+		a.opts.PluginMap[k] = &shared.ModuleGrpcPlugin{}
+	}
 	a.opts.Client = plugin.NewClient(&plugin.ClientConfig{
-		HandshakeConfig: a.opts.Handshake,
+		HandshakeConfig: a.opts.Handshake, //TODO 处理默认握手配置
 		Plugins:         a.opts.PluginMap,
-		Cmd:             exec.Command("sh", "-c", os.Getenv("KV_PLUGIN")),
+		Cmd:             exec.Command("sh", "-c", os.Getenv("OTTER_PLUGIN")),
 		AllowedProtocols: []plugin.Protocol{
-			plugin.ProtocolNetRPC,
 			plugin.ProtocolGRPC},
 	})
 }
@@ -39,6 +50,14 @@ func NewApplication() *Application {
 }
 
 func loadConfig() *Config {
-	//TODO
-	return nil
+	var config = &Config{}
+	data, err := os.ReadFile("application.yaml")
+	if err != nil {
+		panic(err)
+	}
+	err = yaml.Unmarshal(data, config)
+	if err != nil {
+		panic(err)
+	}
+	return config
 }
